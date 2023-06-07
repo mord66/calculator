@@ -37,22 +37,38 @@ body{
 
 .display{
     margin-top: 7%;
-    width:87%;
-    height: 20%;
+    min-width:87%;
+    min-height: 20%;
     border: solid 2px black;
     border-radius: 15px;
     background-color: #666E6F;
     box-shadow: inset 0px 0px 2px 2px;
     font-family:digital;
     position:relative;
+
 }
 
-.display span {
-    margin: 8%;
+.display .bottom {
+    margin-bottom: 9%;
+    margin-right: 5%;
     position:absolute;
     bottom:0;
     right:0;
-    font-size: 36px;
+    font-size: 45px;
+    max-width: 90%;
+    max-height:32%;
+    border: solid 1px black;
+}
+
+.display .topp{
+    margin-top: 4%;
+    position: absolute;
+    top:0;
+    right:0;
+    margin-right: 5%;
+    font-size: 30px;
+    max-width: 90%;
+    max-height:32%;
 }
 
 .top-buttons{
@@ -95,6 +111,7 @@ body{
     border-radius: 100%;
     font-size: 24px;
     font-weight: bold;
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
 .number:hover{
@@ -106,7 +123,7 @@ body{
     transform: scale(0.98);
 }
 
-.operator{
+.operator, .equals{
     flex: 1 0 20%;
     margin: 6px;
     border: solid 4px black;
@@ -115,11 +132,12 @@ body{
     font-weight: bold;
 }
 
-.operator:hover{
+.operator, .equals:hover{
         -webkit-transform: translateY(-2px);
         transform: translateY(-2px);
 }
 
-.operator:active{
+.operator, .equals:active{
     transform: scale(0.98);
 }
+
