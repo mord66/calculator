@@ -20,6 +20,8 @@ function operate(a, b, operation){
     }
 }
 
+
+
 const displayTop = document.querySelector(".display .topp");
 const displayBottom = document.querySelector(".display .bottom");
 const deleteButton = document.querySelector(".delete");
@@ -47,26 +49,40 @@ const operands = {
     second:"",
     operand:"",
     operandSymbol:"",
-    operation:false,
-    equals:false,
+    operated:false,
 }
+let clickCount = 0;
+operatorButtons.forEach(function(i){
+    i.addEventListener("click", function(e){
+        if (clickCount == 0){
+            if (displayBottom.textContent !=""){
+                operands.first = parseInt(displayBottom.textContent);
+                operands.operandSymbol = e.target.value;
+                operands.operand = e.target.id;
+                displayTop.textContent = operands.first + " " + operands.operandSymbol;
+                displayBottom.textContent = "";
+                clickCount +=1;
+                console.log(operands.first);
+            }
+            }
+        
+    }   
+    )
+    })
+
 
 
 numberButtons.forEach(function(i){
     i.addEventListener("click", function(e){
-           if (operands.operation == false){ 
-            if(displayBottom.textContent.length < 15){
-                displayBottom.textContent = displayBottom.textContent + e.target.value;
-                }
-           }
-           else if (operands.operation == true){
-            if(displayBottom.textContent.length < 15){
-                displayBottom.textContent = displayBottom.textContent +e.target.value;
+            console.log(operands.operated);
+            if (operands.operated == true && displayBottom.textContent.length <15){
+                displayBottom.textContent = "";
+                operands.operated = false;
             }
-           }
-        })
-    });
-
+            displayBottom.textContent = displayBottom.textContent + e.target.value;
+            }
+    )
+            })
 
 clearButton.addEventListener("click", ()=>{
     displayBottom.textContent  = "";
@@ -76,54 +92,21 @@ clearButton.addEventListener("click", ()=>{
 deleteButton.addEventListener("click", ()=>{
     displayBottom.textContent = displayBottom.textContent.slice(0, -1);
 })
-let clickCount = 0;
-operatorButtons.forEach(function(i){
-    i.addEventListener("click", function(e){
-        if (clickCount == 0) {
-        displayBottom.textContent = displayBottom.textContent + e.target.value;
-        operands.first = displayBottom.textContent;
-        operands.first = parseInt(operands.first)
-            operands.operand = e.target.id;
-            operands.operandSymbol = e.target.value;
-            if (operands.second == ""){
-            displayTop.textContent = operands.first + " " + e.target.value;
-            }
-            else if (operands.second != ""){
-                displayTop.textContent = b + " " + e.target.value;
-            }
-            clickCount +=1;
-            displayBottom.textContent = "";
-            console.log(operands.first);
-            console.log(operands.second);
-        }
-        else if (clickCount >= 1){
-            operands.operation = true;
-            operands.operand = e.target.id;
-            operands.second = displayBottom.textContent;
-            operands.second = parseInt(operands.second);
-            operands.operandSymbol = e.target.value;
-            b = operate(operands.first, operands.second, operands.operand);
-            displayBottom.textContent = b;
-            displayTop.textContent = b + " " + operands.operandSymbol;
-            displayBottom.textContent = "";
-            clickCount = 0;
-        }
-        })
-
-    })
 
 equalsButton.addEventListener("click",function(){
-    operands.equals == true;
-    displayBottom.textContent = displayBottom.textContent + numberButtons.value;
-    operands.second = parseInt(displayBottom.textContent);
-    displayTop.textContent = operands.first + " " + operands.operandSymbol + " " + operands.second;
-    let a = operate(operands.first, operands.second, operands.operand);
-    displayTop.textContent = operands.first + " " + operands.operandSymbol + " " + operands.second + " " + "=" + a;
-    console.log(operands.first);
-    console.log(operands.second);
-    displayBottom.textContent = a;
-    clickCount = 0;
-    console.log(operands.first);
+    
+    if (clickCount == 1){
+        operands.second = parseInt(displayBottom.textContent);
+    }
+    if (operands.second != ""){
+        let a = operate(operands.first, operands.second, operands.operand);
+        displayTop.textContent = operands.first + " " + operands.operandSymbol + " " + operands.second + " " + "=" + a;
+        displayBottom.textContent = a;
+        operands.operated = true;
+        clickCount = 0;
+        operands.second = "";
+    }
+    console.log(clickCount);
     console.log(operands.second);
 
 })
