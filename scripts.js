@@ -107,6 +107,10 @@ equalsButton.addEventListener("click",function(){
         operands.error = true;
         clickCount = 0;
     }
+    else if (operands.first == "" && operands.second == ""){
+        displayBottom.textContent ="";
+        displayTop.textContent = "";
+    }
     else {
         let a = operate(operands.first, operands.second, operands.operand);
         displayTop.textContent = operands.first + " " + operands.operandSymbol + " " + operands.second + " " + "=" + a;
