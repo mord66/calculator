@@ -50,6 +50,7 @@ const operands = {
     operand:"",
     operandSymbol:"",
     operated:false,
+    error:false,
 }
 let clickCount = 0;
 operatorButtons.forEach(function(i){
@@ -73,11 +74,11 @@ operatorButtons.forEach(function(i){
 
 
 numberButtons.forEach(function(i){
-    i.addEventListener("click", function(e){
-            console.log(operands.operated);
-            if (operands.operated == true && displayBottom.textContent.length <15){
+    i.addEventListener("click", function(e){ 
+            if (operands.operated == true && displayBottom.textContent.length <15 || operands.error && true){
                 displayBottom.textContent = "";
                 operands.operated = false;
+                operands.error = false;
             }
             displayBottom.textContent = displayBottom.textContent + e.target.value;
             }
@@ -97,8 +98,16 @@ equalsButton.addEventListener("click",function(){
     
     if (clickCount == 1){
         operands.second = parseInt(displayBottom.textContent);
+        console.log(operands.second);
     }
-    if (operands.second != ""){
+    if (operands.operand == "divide" && operands.second ==0){
+        operands.operated = true;
+        displayTop.textContent ="";
+        displayBottom.textContent = "ERROR";
+        operands.error = true;
+        clickCount = 0;
+    }
+    else {
         let a = operate(operands.first, operands.second, operands.operand);
         displayTop.textContent = operands.first + " " + operands.operandSymbol + " " + operands.second + " " + "=" + a;
         displayBottom.textContent = a;
@@ -106,7 +115,9 @@ equalsButton.addEventListener("click",function(){
         clickCount = 0;
         operands.second = "";
     }
-    console.log(clickCount);
-    console.log(operands.second);
+     
+    }
 
-})
+
+
+)
