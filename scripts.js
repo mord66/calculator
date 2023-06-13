@@ -75,13 +75,20 @@ operatorButtons.forEach(function(i){
 
 numberButtons.forEach(function(i){
     i.addEventListener("click", function(e){ 
-            if (operands.operated == true && displayBottom.textContent.length <15 || operands.error && true){
+            if (operands.operated == true || operands.error && true){
                 displayBottom.textContent = "";
                 operands.operated = false;
                 operands.error = false;
             }
+            if (displayBottom.textContent.length > 16){
+                displayBottom.textContent = displayBottom.textContent +"";
+            }
+            else {
             displayBottom.textContent = displayBottom.textContent + e.target.value;
             }
+
+            
+        }
     )
             })
 
@@ -96,7 +103,7 @@ deleteButton.addEventListener("click", ()=>{
 
 equalsButton.addEventListener("click",function(){
     
-    if (clickCount == 1){
+    if (clickCount == 1 && displayBottom.textContent !=""){
         operands.second = parseInt(displayBottom.textContent);
         console.log(operands.second);
     }
@@ -107,9 +114,10 @@ equalsButton.addEventListener("click",function(){
         operands.error = true;
         clickCount = 0;
     }
-    else if (operands.first == "" && operands.second == ""){
+    else if (operands.first == "" || operands.second == ""){
         displayBottom.textContent ="";
         displayTop.textContent = "";
+        clickCount = 0;
     }
     else {
         let a = operate(operands.first, operands.second, operands.operand);

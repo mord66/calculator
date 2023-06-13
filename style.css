@@ -36,27 +36,30 @@ body{
 }
 
 .display{
-    margin-top: 7%;
+    margin-top: 4%;
     min-width:87%;
-    min-height: 20%;
+    min-height: 26%;
     border: solid 2px black;
     border-radius: 15px;
     background-color: #666E6F;
     box-shadow: inset 0px 0px 2px 2px;
-    font-family:digital;
+    font-family:monospace;
     position:relative;
 
 }
 
 .display .bottom {
-    margin-bottom: 9%;
-    margin-right: 5%;
+    margin-bottom: 3%;
+    padding-top: 9%;
+    margin-right: 3%;
+    margin-top: 10%;
     position:absolute;
     bottom:0;
     right:0;
-    font-size: 45px;
-    max-width: 90%;
-    max-height:32%;
+    font-size: 32px;
+    max-width: 95%;
+    max-height:45%;
+    word-wrap: break-word;
 }
 
 .display .topp{
@@ -65,7 +68,7 @@ body{
     top:0;
     right:0;
     margin-right: 5%;
-    font-size: 30px;
+    font-size: 17px;
     max-width: 90%;
     max-height:32%;
 }
@@ -97,7 +100,7 @@ body{
 }
 
 .numbers{
-    margin-top: 6%;
+    margin-top:2%;
     width:85%;
     height: 53%;
     display: flex;
